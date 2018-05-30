@@ -1,0 +1,58 @@
+<div class="container">
+
+  <!-- Complete this markup for showing error upon unsuccessful login. -->
+
+
+  <!-- Complete this markup for showing the status bar correctly, depending on whether or not the user is authenticated. -->
+  <div class="status" *ngIf="token">
+    <span>User ID: {{user.name}} </span>
+    <button (click)="testApi()">Test API</button>
+    <button (click)="logout()">Logout</button>
+  </div>
+
+  <!-- Add markup for showing the login form if the user is not authenticated. -->
+  <div *ngIf="!token">
+    <p *ngIf="error" class="error">Login credentials were incorrect!</p>
+
+  <form
+    (ngSubmit)="login(f.value)"
+    #f="ngForm"
+  >
+    <div class="form-group">
+      <label for="username"> Please enter your username</label>
+      <input
+        type="text"
+        name="username"
+        id="username"
+        class="form-control"
+        placeholder="Enter username..."
+
+        ngModel
+        #username="ngModel"
+
+        required
+      >
+    </div>
+    <div class="form-group">
+      <label for="password"> Please enter your password</label>
+      <input
+        type="text"
+        name="password"
+        id="password"
+        class="form-control"
+        placeholder="Enter password..."
+
+        ngModel
+        #password="ngModel"
+
+        required
+        minlength="8"
+      >
+    </div>
+  <button
+  type="submit"
+  [disabled]="!f.valid"
+  >Log in</button>
+  </form>
+  </div>
+</div>
